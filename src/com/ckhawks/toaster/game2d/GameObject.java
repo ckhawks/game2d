@@ -1,9 +1,11 @@
 package com.ckhawks.toaster.game2d;
 
+import java.awt.*;
+
 /**
  * Created by Melted on 2/19/2016.
  */
-public abstract class MovingObject {
+public abstract class GameObject {
 
     protected int x, y; // position of object
     protected int param1, param2, param3, param4;
@@ -14,6 +16,9 @@ public abstract class MovingObject {
 
     // updates 60 times per second
     public abstract void update();
+
+    // rendering logic, updated 60 times per second
+    public abstract void render(Graphics g);
 
     // returns identifier of the shape of the crap
     public abstract int getShape();

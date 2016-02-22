@@ -2,7 +2,7 @@ package com.ckhawks.toaster.game2d;
 
 import java.awt.*;
 
-public class Bullet extends MovingObject {
+public class Bullet extends GameObject {
 
     public int x, y, dx, dy = 0; // position
 
@@ -36,6 +36,13 @@ public class Bullet extends MovingObject {
             // moving = false;
             // remove
         }
+    }
+
+    @Override
+    public void render(Graphics g) {
+        //System.out.println("Bullet from (" + object.getX() + ", " + object.getY() + ") to (" + object.getParameter1() + ", " + object.getParameter2() + ").");
+        g.drawLine(getX(), getY(), getParameter1(), getParameter2());
+        g.fillRect(getX(), getY(), width, length);
     }
 
     // set the planned destination of the bullet
@@ -76,7 +83,7 @@ public class Bullet extends MovingObject {
     // return the drawing shape of the bullet
     @Override
     public int getShape() {
-        return MovingObject.drawLine;
+        return GameObject.drawLine;
     }
 
     @Override

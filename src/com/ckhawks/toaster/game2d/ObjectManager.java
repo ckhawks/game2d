@@ -1,6 +1,5 @@
 package com.ckhawks.toaster.game2d;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
@@ -9,17 +8,39 @@ import java.util.ArrayList;
  */
 public class ObjectManager implements Runnable {
 
-    private ArrayList<MovingObject> objects;
+    private ArrayList<GameObject> objects;
 
     private boolean availability;
 
     public ObjectManager(){
-        objects = new ArrayList<MovingObject>();
+        objects = new ArrayList<GameObject>();
         availability = true;
     }
 
+    // main object loop
+    @Override
+    public void run() {
+        while(true){
+            try {
+                Thread.sleep(1000 / 60);
+
+                // update each object 60 times per second
+                if(this.isAvailable()){
+                    this.acquire();
+                    for(GameObject object : objects){
+                        object.update();
+                    }
+                    this.release();
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     // add new object to
-    public void addNewObject(MovingObject obj){
+    public void addNewObject(GameObject obj){
         // only run if it's not in use
         if(this.isAvailable()) {
             this.acquire();
@@ -28,10 +49,25 @@ public class ObjectManager implements Runnable {
         }
     }
 
+    // prevent other threads from accessing
+    public void acquire(){
+        this.availability = false;
+    }
+
+    // allow other threads to access
+    public void release(){
+        this.availability = true;
+    }
+
+    // check if in use
+    public boolean isAvailable(){
+        return availability;
+    }
+
     // called from drawer whenever keyboard is pressed
     public void keyPressed(int id){
         //System.out.println("OM Key press: " + id);
-        for(MovingObject obj : objects){
+        for(GameObject obj : objects){
             this.acquire();
             if(obj instanceof PlayerBox){
                 ((PlayerBox) obj).keyPress(id);
@@ -53,7 +89,7 @@ public class ObjectManager implements Runnable {
             // only run if it's not in use
             if(this.isAvailable()){
                 this.acquire();
-                for(MovingObject obj : objects){
+                for(GameObject obj : objects){
                     if(obj instanceof PlayerBox){
                         pb = (PlayerBox) obj;
                     }
@@ -76,41 +112,8 @@ public class ObjectManager implements Runnable {
     }
 
     // for looping through objects, used in drawer
-    public ArrayList<MovingObject> allYourObjectsAreBelongToMe(){
+    public ArrayList<GameObject> getObjects(){
         return objects;
     }
 
-    public void acquire(){
-        this.availability = false;
-    }
-
-    public void release(){
-        this.availability = true;
-    }
-
-    public boolean isAvailable(){
-        return availability;
-    }
-
-    // main object loop
-    @Override
-    public void run() {
-        while(true){
-            try {
-                Thread.sleep(1000 / 60);
-
-                // update each object 60 times per second
-                if(this.isAvailable()){
-                    this.acquire();
-                    for(MovingObject object : objects){
-                        object.update();
-                    }
-                    this.release();
-                }
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

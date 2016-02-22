@@ -41,21 +41,10 @@ public class Drawer extends JComponent implements Runnable, KeyListener, MouseLi
         // only run if it's not in use
         if(om.isAvailable()) {
             om.acquire();
-            for (MovingObject object : om.allYourObjectsAreBelongToMe()) {
-                //System.out.println(object);
-                //if(object.getShape() != 666){
-                //    System.out.println(object.getShape());
-                //}
-                switch (object.getShape()) {
-                    case MovingObject.drawLine:
-                        // Drawing line from object position to param1, param2.
-                        //System.out.println("Bullet from (" + object.getX() + ", " + object.getY() + ") to (" + object.getParameter1() + ", " + object.getParameter2() + ").");
-                        g.drawLine(object.getX(), object.getY(), object.getParameter1(), object.getParameter2());
-                        break;
-                    case MovingObject.fillRect:
-                        g.fillRect(object.getX(), object.getY(), object.getParameter1(), object.getParameter2());
-                        break;
-                }
+            for (GameObject object : om.getObjects()) {
+
+                object.render(g);
+
             }
             om.release();
         }
@@ -78,6 +67,10 @@ public class Drawer extends JComponent implements Runnable, KeyListener, MouseLi
     public void keyPressed(KeyEvent e) {
         om.keyPressed(e.getKeyCode());
     }
+
+    //
+    //     UNUSED INPUT FUNCTIONS
+    //
 
     @Override
     public void keyReleased(KeyEvent e) {

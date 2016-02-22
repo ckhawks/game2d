@@ -1,5 +1,6 @@
 package com.ckhawks.toaster.game2d;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
@@ -9,6 +10,12 @@ public class PlayerBox extends MovingBox {
 
     public PlayerBox(int xPos, int yPos, int width, int height) {
         super(xPos, yPos, width, height);
+    }
+
+    @Override
+    public void render(Graphics g) {
+        g.fillRect(getX(), getY(), getParameter1(), getParameter2());
+        // draw player sprite
     }
 
     public void keyPress(int id){

@@ -40,10 +40,10 @@ public class Main {
 
         SettingsManager sm = new SettingsManager();
 
-        MovingObject box = new PlayerBox(WIDTH / 2, HEIGHT / 2, 16, 32);
+        GameObject box = new PlayerBox(WIDTH / 2, HEIGHT / 2, 16, 32);
         om.addNewObject(box);
 
-        MovingObject enemy = new EnemyBox(10, 10, 20, 20);
+        GameObject enemy = new EnemyBox(10, 10, 20, 20);
         om.addNewObject(enemy);
 
         // add drawer thingy to thingy thing

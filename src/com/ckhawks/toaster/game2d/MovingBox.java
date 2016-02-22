@@ -2,7 +2,7 @@ package com.ckhawks.toaster.game2d;
 
 import java.awt.*;
 
-public class MovingBox extends MovingObject {
+public class MovingBox extends GameObject {
 
     protected int dx, dy = 0; // position
 
@@ -72,8 +72,13 @@ public class MovingBox extends MovingObject {
     }
 
     @Override
+    public void render(Graphics g) {
+        g.fillRect(getX(), getY(), getParameter1(), getParameter2());
+    }
+
+    @Override
     public int getShape() {
-        return MovingObject.fillRect;
+        return GameObject.fillRect;
     }
 
     // return size of box
