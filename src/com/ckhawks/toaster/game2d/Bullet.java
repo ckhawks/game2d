@@ -41,33 +41,19 @@ public class Bullet extends GameObject {
     @Override
     public void render(Graphics g) {
         //System.out.println("Bullet from (" + object.getX() + ", " + object.getY() + ") to (" + object.getParameter1() + ", " + object.getParameter2() + ").");
-        g.drawLine(getX(), getY(), getParameter1(), getParameter2());
+        g.drawLine(getX(), getY(), this.targetX, this.targetY);
         g.fillRect(getX(), getY(), width, length);
     }
 
     // set the planned destination of the bullet
     public void setTargetPosition(int goingTowardsX, int goingTowardsY){
-        targetX = goingTowardsX;
-        targetY = goingTowardsY;
-
-        // ???
-        //dx = this.x - this.x;
-        //dy = this.y - this.y;
-
-        // moving = true;
-        this.param1 = goingTowardsX;
-        this.param2 = goingTowardsY;
-
+        this.targetX = goingTowardsX;
+        this.targetY = goingTowardsY;
     }
 
     // return destination of the bullet
     public Dimension getTargetPosition(){
-        return new Dimension(targetX, targetY);
-    }
-
-    // return size of bullet
-    public Dimension getSize(){
-        return new Dimension(this.width, this.length);
+        return new Dimension(this.targetX, this.targetY);
     }
 
     @Override
@@ -80,10 +66,9 @@ public class Bullet extends GameObject {
         return this.y;
     }
 
-    // return the drawing shape of the bullet
-    @Override
-    public int getShape() {
-        return GameObject.drawLine;
+    // return size of bullet
+    public Dimension getSize(){
+        return new Dimension(this.width, this.length);
     }
 
     @Override

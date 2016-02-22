@@ -3,9 +3,6 @@ package com.ckhawks.toaster.game2d;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-/**
- * Created by Melted on 2/19/2016.
- */
 public class ObjectManager implements Runnable {
 
     private ArrayList<GameObject> objects;

@@ -1,13 +1,8 @@
 package com.ckhawks.toaster.game2d;
 
-import com.sun.scenario.Settings;
-
 import java.awt.*;
 import java.util.Random;
 
-/**
- * Created by Melted on 2/21/2016.
- */
 public class EnemyBox extends MovingBox {
 
     private int targetX, targetY;
@@ -15,8 +10,8 @@ public class EnemyBox extends MovingBox {
 
     public EnemyBox(int xPos, int yPos, int width, int height) {
         super(xPos, yPos, width, height);
-        this.param1 = width;
-        this.param2 = height;
+        this.width = width;
+        this.height = height;
         pickTargetPosition();
     }
 
@@ -81,14 +76,14 @@ public class EnemyBox extends MovingBox {
             pickTargetPosition();
         }
 
-        if(x + this.param1 > SettingsManager.getScreenWidth()){
+        if(x + this.width > SettingsManager.getScreenWidth()){
             dx *= -1;
-            x = SettingsManager.getScreenWidth() - this.param1;
+            x = SettingsManager.getScreenWidth() - this.width;
         }
 
-        if(y + this.param2 > SettingsManager.getScreenHeight()) {
+        if(y + this.height > SettingsManager.getScreenHeight()) {
             dy *= -1;
-            y = SettingsManager.getScreenHeight() - this.param2;
+            y = SettingsManager.getScreenHeight() - this.height;
         }
     }
 

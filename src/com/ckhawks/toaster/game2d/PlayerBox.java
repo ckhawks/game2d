@@ -3,9 +3,6 @@ package com.ckhawks.toaster.game2d;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-/**
- * Created by Melted on 2/19/2016.
- */
 public class PlayerBox extends MovingBox {
 
     public PlayerBox(int xPos, int yPos, int width, int height) {
@@ -14,7 +11,7 @@ public class PlayerBox extends MovingBox {
 
     @Override
     public void render(Graphics g) {
-        g.fillRect(getX(), getY(), getParameter1(), getParameter2());
+        g.fillRect(getX(), getY(), this.width, this.height);
         // draw player sprite
     }
 

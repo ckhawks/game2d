@@ -6,6 +6,9 @@ public class MovingBox extends GameObject {
 
     protected int dx, dy = 0; // position
 
+    protected int width;
+    protected int height;
+
     public int decelerate = 1; // accelerations / deceleration
 
     // riven x certified industrial industry standard code certification.
@@ -17,8 +20,8 @@ public class MovingBox extends GameObject {
         dx = 0;
         dy = 0;
 
-        this.param1 = width;
-        this.param2 = height;
+        this.width = width;
+        this.height = height;
     }
 
     public void update(){
@@ -60,30 +63,26 @@ public class MovingBox extends GameObject {
             y = 0;
         }
 
-        if(x + this.param1 > SettingsManager.getScreenWidth()){
+        if(x + this.width > SettingsManager.getScreenWidth()){
             dx *= -1;
-            x = SettingsManager.getScreenWidth() - this.param1;
+            x = SettingsManager.getScreenWidth() - this.width;
         }
 
-        if(y + this.param2 > SettingsManager.getScreenHeight()){
+        if(y + this.height > SettingsManager.getScreenHeight()){
             dy *= -1;
-            y = SettingsManager.getScreenHeight() - this.param2;
+            y = SettingsManager.getScreenHeight() - this.height;
         }
     }
 
     @Override
     public void render(Graphics g) {
-        g.fillRect(getX(), getY(), getParameter1(), getParameter2());
+        g.fillRect(getX(), getY(), getSize().width, getSize().height);
     }
 
-    @Override
-    public int getShape() {
-        return GameObject.fillRect;
-    }
 
     // return size of box
     public Dimension getSize(){
-        return new Dimension(this.param1, this.param2);
+        return new Dimension(this.width, this.height);
     }
 
 }

@@ -1,11 +1,10 @@
-
-// TODO remove loop from object (box)
-// TODO have new update thread
-
 package com.ckhawks.toaster.game2d;
 
 import javax.swing.*;
 import java.awt.*;
+
+// TODO remove loop from object (box)
+// TODO have new update thread
 
 public class Main {
     public static final int WIDTH = 500;
